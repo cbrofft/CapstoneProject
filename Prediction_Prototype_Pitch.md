@@ -1,0 +1,44 @@
+Text Prediction Prototype for Smart Search
+========================================================
+author: Chris Brofft
+date: 12/18/2018
+autosize: true
+
+Overview
+========================================================
+
+Many of our intranet sites and our internal company search engines require a way for data entry to be more automated and allow for more text prediction.  This presentation will describe the method being proposed based off of downloadable test data from SwiftKey
+
+
+
+Method we proposed using 
+========================================================
+We plan on using N-gram tokanization along with Kneser-Kney Smoothing in order to develop our prediction model.  We will be using the swiftkey data set with provides a corpus of data from news, twitter and blogs
+
+
+Prediction Statement
+========================================================
+
+```r
+getWords <- function(str){
+  require(quanteda)
+  tokens <- tokens(x = char_tolower(str))
+  tokens <- char_wordstem(rev(rev(tokens[[1]])[1:2]), language = "english")
+  
+  words <- ThreeWords(tokens[1], tokens[2], 5)
+  chain_1 <- paste(tokens[1], tokens[2], words[1], sep = " ")
+  
+  print(words[1])
+}
+```
+
+Demo
+========================================================
+- Link: 
+
+
+Sources/References
+========================================================
+- SwiftKey DataSet: https://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip
+- N-Gram Tokenization: https://www.tidytextmining.com/ngrams.html
+- Kneser-Kney Smoothing: http://www.foldl.me/2014/kneser-ney-smoothing/
